@@ -157,5 +157,7 @@ function set_cookie(name, value, exp_y, exp_m, exp_d, path, domain, secure){
   if (secure){
     cookie_string += "; secure";
   }
+  console.log("cookie_string = "+cookie_string);
   document.cookie = cookie_string;
+  console.log("document.cookie = "+document.cookie);
 }
