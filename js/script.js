@@ -47,6 +47,7 @@ function main(){
             animateNumberValue("item-sum", 0, itemsSumArr[countSum], 50);
           } else {
             document.getElementById("item-sum").innerHTML = "WIN";
+            clearInterval(timerId);   //останавливаем таймер
           }
         } else if (temp > itemsSumArr[countSum]){
           gameOver(timerId, score)
