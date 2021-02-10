@@ -46,7 +46,7 @@ function main(){
           if (itemsSumArr[countSum] !== undefined){
             animateNumberValue("item-sum", 0, itemsSumArr[countSum], 50);
           } else {
-            document.getElementById("item-sum").innerHTML = "VIN";
+            document.getElementById("item-sum").innerHTML = "WIN";
           }
         } else if (temp > itemsSumArr[countSum]){
           gameOver(timerId, score)
