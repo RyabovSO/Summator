@@ -131,7 +131,7 @@ function animateNumberValue(id,from,to,duration) {
 //Функция вызывается когда игрок проиграл
 function gameOver(timerId, score) {
   //alert("Вы проиграли");
-  set_cookie("score", score, 2021, 02, 15, "", document.location.href, "secure");
+  set_cookie("score", score, 2021, 02, 15, "", "https://ryabovso.github.io/Summator/", "secure");
 
   document.getElementById("score").innerHTML = score;
 
