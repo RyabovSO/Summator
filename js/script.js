@@ -3,8 +3,7 @@ function main(){
   let timerCount = 10; //таймер
   document.getElementById("item-time").innerHTML = timerCount;
   let countItems = 36; //кол-во ячеек
-  //let minSum = 180;
-  //let maxSum = 200;
+
   let minItemSum = 11; //диапазон суммы
   let maxItemSum = 19;
 
@@ -14,12 +13,9 @@ function main(){
   let itemsArr = getItemsArr(minItem, maxItem, countItems);
   console.log("itemsArr="+ itemsArr);
   let sum = summElementsArr(itemsArr);
-  //console.log("sum="+ sum);
 
   let itemsSumArr = getItemsSumArr(sum,minItemSum,maxItemSum)
   console.log("itemsSumArr="+itemsSumArr);
-  //console.log("itemSum="+ summElementsArr(itemsSumArr));
-
 
   let index = 0;
   let items = document.querySelectorAll('.cell');
@@ -60,6 +56,7 @@ function main(){
     };
   });
 }
+
 //получить ячейки
 function getItemsArr(minItem, maxItem, countItems) {
   let result = [];
@@ -71,6 +68,7 @@ function getItemsArr(minItem, maxItem, countItems) {
   }
   return result;
 }
+
 //получить суммы ячеек
 function getItemsSumArr(sum, minItemSum, maxItemSum) {
   let result = [];
@@ -97,12 +95,14 @@ function summElementsArr(arr){
   }
   return result;
 }
+
 //Получение случайного целого числа в заданном интервале, включительно
 function getRandomIntInclusive(min, max) {
   min = Math.ceil(min);
   max = Math.floor(max);
   return Math.floor(Math.random() * (max - min + 1)) + min; //Максимум и минимум включаются
 }
+
 //Вывод таймера
 function printTimer(timerCount, score) {
   let timerId = setInterval(function() {
@@ -114,7 +114,7 @@ function printTimer(timerCount, score) {
   return timerId;
 }
 
-//анимация появления числа
+//Анимация появления числа
 function animateNumberValue(id,from,to,duration) {
   //document.getElementById(id).innerHTML = timerCount;
   var element = document.getElementById(id);
@@ -127,22 +127,23 @@ function animateNumberValue(id,from,to,duration) {
     if (progress < 1) setTimeout(arguments.callee, 10);
   }, 10);
 }
-//ф-я вызывается когда игрок проиграл
+
+//Функция вызывается когда игрок проиграл
 function gameOver(timerId, score) {
   //alert("Вы проиграли");
   ///document.cookie = "score="+score+"; expires=дата; path=путь; domain=домен; secure";
-  var cookie_date = new Date ( );  // Текущая дата и время
-  cookie_date.setTime ( cookie_date.getTime() - 1 );
+  set_cookie("score", score, 2021, 02, 15, "", document.location.href, "secure");
 
-  console.log(cookie_date);
   document.getElementById("score").innerHTML = score;
+
   clearInterval(timerId); //останавливаем таймер
   document.querySelector(".header").classList.add("blur");
   document.querySelector(".fields").classList.add("blur");
   document.querySelector(".game-menu").classList.remove("hide");
 }
+
 //Функция для установки куки
-function set_cookie ( name, value, exp_y, exp_m, exp_d, path, domain, secure ){
+function set_cookie(name, value, exp_y, exp_m, exp_d, path, domain, secure){
   var cookie_string = name + "=" + escape ( value );
   if (exp_y){
     var expires = new Date (exp_y, exp_m, exp_d);
@@ -157,5 +158,7 @@ function set_cookie ( name, value, exp_y, exp_m, exp_d, path, domain, secure ){
   if (secure){
     cookie_string += "; secure";
   }
+  console.log(cookie_string);
   document.cookie = cookie_string;
+  alert("document.cookie="+document.cookie);
 }
