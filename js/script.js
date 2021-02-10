@@ -131,7 +131,6 @@ function animateNumberValue(id,from,to,duration) {
 //Функция вызывается когда игрок проиграл
 function gameOver(timerId, score) {
   //alert("Вы проиграли");
-  ///document.cookie = "score="+score+"; expires=дата; path=путь; domain=домен; secure";
   set_cookie("score", score, 2021, 02, 15, "", document.location.href, "secure");
 
   document.getElementById("score").innerHTML = score;
@@ -158,7 +157,5 @@ function set_cookie(name, value, exp_y, exp_m, exp_d, path, domain, secure){
   if (secure){
     cookie_string += "; secure";
   }
-  console.log(cookie_string);
   document.cookie = cookie_string;
-  alert("document.cookie="+document.cookie);
 }
