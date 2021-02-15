@@ -1,5 +1,10 @@
 main();
+
+//Хочу выразить огромную благодарность Вам, что уделили время данной игре. Это самое ценное что вы могли дать мне.
+//Надеюсь из игры вы почерпнули что-то новое, а значит мои старания были не напрасны.
+
 function main(){
+
   let timerCount = 10; //таймер
   document.getElementById("item-time").innerHTML = timerCount;
   let countItems = 36; //кол-во ячеек
@@ -26,6 +31,9 @@ function main(){
   }
   var item_sum = document.getElementById("item-sum").innerHTML = itemsSumArr[0];
   document.addEventListener('DOMContentLoaded', function() { // когда весь HTML загружен
+
+
+
     let score = 0;
     let timerId = printTimer(timerCount, score);
     var elements = document.querySelectorAll(".cell"); // вызвать клик на кнопку
@@ -48,6 +56,15 @@ function main(){
           } else {
             document.getElementById("item-sum").innerHTML = "WIN";
             clearInterval(timerId);   //останавливаем таймер
+
+            let marginTop = -300;
+            let titles_interval = setInterval(function() {
+              if (document.getElementById("titles-text").style.marginTop == scrollHeight+"px"){
+                clearInterval(titles_interval);
+              }
+              ++marginTop;
+              document.getElementById("titles-text").style.marginTop = marginTop+"px";
+            }, 10)
           }
         } else if (temp > itemsSumArr[countSum]){
           gameOver(timerId, score)
@@ -108,6 +125,10 @@ function getRandomIntInclusive(min, max) {
 function printTimer(timerCount, score) {
   let timerId = setInterval(function() {
     document.getElementById("item-time").innerHTML = --timerCount;
+    if (timerCount == 8){
+
+
+    }
     if (timerCount == 0) {
       gameOver(timerId, score);
     }
@@ -132,6 +153,7 @@ function animateNumberValue(id,from,to,duration) {
 //Функция вызывается когда игрок проиграл
 function gameOver(timerId, score) {
   //alert("Вы проиграли");
+
   set_cookie("score", score, 2021, 02, 15, "", "https://ryabovso.github.io/Summator/", "secure");
 
   document.getElementById("score").innerHTML = score;
@@ -158,7 +180,9 @@ function set_cookie(name, value, exp_y, exp_m, exp_d, path, domain, secure){
   if (secure){
     cookie_string += "; secure";
   }
-  console.log("cookie_string = "+cookie_string);
-  document.cookie = cookie_string;
-  console.log("document.cookie = "+document.cookie);
 }
+var scrollHeight = Math.max(
+    document.body.scrollHeight, document.documentElement.scrollHeight,
+    document.body.offsetHeight, document.documentElement.offsetHeight,
+    document.body.clientHeight, document.documentElement.clientHeight
+  );
