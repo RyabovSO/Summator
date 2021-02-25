@@ -8,62 +8,31 @@
   </head>
   <body>
     <div class="game">
-      <div class="header">
+      <div class="header blur">
         <div id="item-sum" class="cell-sum"></div>
+        <div id="item-lvl" class="item-lvl "></div>
         <div id="item-time" class="time-container"></div>
       </div>
-      <div class="fields">
-        <div class="cell">4</div>
-        <div class="cell">5</div>
-        <div class="cell">6</div>
-        <div class="cell">7</div>
-        <div class="cell">8</div>
-        <div class="cell">9</div>
-
-        <div class="cell">4</div>
-        <div class="cell">5</div>
-        <div class="cell">6</div>
-        <div class="cell">7</div>
-        <div class="cell">8</div>
-        <div class="cell">9</div>
-
-        <div class="cell">4</div>
-        <div class="cell">5</div>
-        <div class="cell">6</div>
-        <div class="cell">7</div>
-        <div class="cell">8</div>
-        <div class="cell">9</div>
-
-        <div class="cell">4</div>
-        <div class="cell">5</div>
-        <div class="cell">6</div>
-        <div class="cell">7</div>
-        <div class="cell">8</div>
-        <div class="cell">9</div>
-
-        <div class="cell">4</div>
-        <div class="cell">5</div>
-        <div class="cell">6</div>
-        <div class="cell">7</div>
-        <div class="cell">8</div>
-        <div class="cell">9</div>
-
-        <div class="cell">4</div>
-        <div class="cell">5</div>
-        <div class="cell">6</div>
-        <div class="cell">7</div>
-        <div class="cell">8</div>
-        <div class="cell">9</div>
-        <div id="titles" class="titles">
-            <span id="titles-text" class="titles-text">
-              GitHub RyabovSO<br>
-              Telegram @RyabovSO<br>
-              <br>
-            <span>
+      <div id="fields" class="fields blur"></div>
+      <div class="game-menu ">
+        <div class="game-menu-start">
+          <div class="menu-btn">
+            <div class="menu-btn-text" onclick="startGame()">
+              Start
+            </div>
+          </div>
+          <div class="menu-btn">
+            <div class="menu-btn-text" onclick="">
+              How to play
+            </div>
+          </div>
+          <div class="menu-btn">
+            <div class="menu-btn-text" onclick="">
+              About
+            </div>
+          </div>
         </div>
-      </div>
-      <div class="game-menu hide">
-        <div class="game-menu-end">
+        <div class="game-menu-end hide">
           <div class="menu-end-description">Игра окончена</div>
           <div class="menu-end-score" >
             <div class="score-label">SCORE</div>
@@ -71,13 +40,22 @@
           </div>
           <div class="menu-end-highscore" >
             <div class="score-label">HIGH SCORE</div>
-            <div id="highscore" class="score-value">888</div>
+            <div id="highscore" class="score-value">000</div>
           </div>
-          <div class="game-menu-reset" onclick="window.location.reload()">
+          <div class="game-menu-reset" onclick="initLvL(1)">
             <div class="reset-icon"></div>
           </div>
-          <div class="game-menu-return">return</div>
+          <div class="game-menu-return">
+            <div class="return-icon"></div>
+          </div>
         </div>
+      </div>
+      <div id="titles" class="titles">
+        <span id="titles-text" class="titles-text">
+          GitHub RyabovSO<br>
+          Telegram @RyabovSO<br>
+          <br>
+        <span>
       </div>
     </div>
 

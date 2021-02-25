@@ -1,19 +1,35 @@
-main();
+//main();
 
 //Хочу выразить огромную благодарность Вам, что уделили время данной игре. Это самое ценное что вы могли дать мне.
 //Надеюсь из игры вы почерпнули что-то новое, а значит мои старания были не напрасны.
 
-function main(){
 
+//startGame();
+function startGame(){
+  //document.querySelector(".header").classList.add("blur");
+  //document.querySelector(".fields").classList.add("blur");
+  let lvl = 1;
+  initLvL(lvl);
+}
+
+//инициализация
+function initLvL(lvl){
+  document.getElementById("item-lvl").innerHTML = lvl+" LvL";
+  document.querySelector(".header").classList.remove("blur");
+  document.querySelector(".fields").classList.remove("blur");
+  document.querySelector(".game-menu").classList.add("hide");
+  document.querySelector(".game-menu-start").classList.add("hide");
+  document.querySelector(".game-menu-end").classList.add("hide");
+  document.getElementById("fields").innerHTML = "";
+  let maxLvL = 10; //максимальный уровень
+  let countItems = (lvl+5)*(lvl+5); //кол-во ячеек
+  initItems(lvl, countItems); // инициализация ячеек
   let timerCount = 10; //таймер
-  document.getElementById("item-time").innerHTML = timerCount;
-  let countItems = 36; //кол-во ячеек
-
   let minItemSum = 11; //диапазон суммы
   let maxItemSum = 19;
 
-  let maxItem = 0; //1
-  let minItem = 10; //9
+  let maxItem = 0; //диапазон в ячейке
+  let minItem = 10; //
 
   let itemsArr = getItemsArr(minItem, maxItem, countItems);
   console.log("itemsArr="+ itemsArr);
@@ -30,9 +46,8 @@ function main(){
     index++;
   }
   var item_sum = document.getElementById("item-sum").innerHTML = itemsSumArr[0];
-  document.addEventListener('DOMContentLoaded', function() { // когда весь HTML загружен
-
-
+  //document.addEventListener('click', function() { // когда весь HTML загружен
+    document.getElementById("item-time").innerHTML = timerCount;
 
     let score = 0;
     let timerId = printTimer(timerCount, score);
@@ -44,6 +59,7 @@ function main(){
         temp = temp + parseInt(this.innerHTML, 10);
         this.innerHTML = "";        //очищаем элемент
         this.classList.add("hide"); //скрываем элемент
+
         if(temp == itemsSumArr[countSum]){
           score = score + itemsSumArr[countSum];
           clearInterval(timerId);   //останавливаем таймер
@@ -51,20 +67,27 @@ function main(){
           countSum++;
           temp = 0;
           timerId = printTimer(timerCount, score); //запускаем таймер
+          //уровень еще не пройден
           if (itemsSumArr[countSum] !== undefined){
             animateNumberValue("item-sum", 0, itemsSumArr[countSum], 50);
+          //уровень пройден
           } else {
-            document.getElementById("item-sum").innerHTML = "WIN";
-            clearInterval(timerId);   //останавливаем таймер
-
-            let marginTop = -300;
-            let titles_interval = setInterval(function() {
-              if (document.getElementById("titles-text").style.marginTop == scrollHeight+"px"){
-                clearInterval(titles_interval);
-              }
-              ++marginTop;
-              document.getElementById("titles-text").style.marginTop = marginTop+"px";
-            }, 10)
+            //если уровень меньше maxLvL
+            if (lvl < maxLvL){
+              lvlUp(timerId, lvl);
+            //если конец игры
+            } else if (lvl == maxLvL){
+              document.getElementById("item-sum").innerHTML = "WIN";
+              clearInterval(timerId);   //останавливаем таймер
+              let marginTop = -300;
+              let titles_interval = setInterval(function() {
+                if (document.getElementById("titles-text").style.marginTop == scrollHeight+"px"){
+                  clearInterval(titles_interval);
+                }
+                ++marginTop;
+                document.getElementById("titles-text").style.marginTop = marginTop+"px";
+              }, 10);
+            }
           }
         } else if (temp > itemsSumArr[countSum]){
           gameOver(timerId, score)
@@ -72,9 +95,23 @@ function main(){
         }
       };
     };
-  });
+  //});
 }
-
+//увеличиваем уровень
+function lvlUp(timerId, lvl) {
+  clearInterval(timerId);
+  lvl++;//увеличиваем уровень
+  initLvL(lvl);
+}
+//инициализация ячеек
+function initItems(lvl, countItems){
+  let fontsize = (-lvl*0.7+10.7).toFixed(2);
+  console.log(fontsize);
+  let width_heigh = (78/(lvl+5)-1)+"vmin";
+  for (var i = 0; i < countItems; i++) {
+    document.getElementById("fields").innerHTML += '<div class="cell" style="width:'+width_heigh+';height:'+width_heigh+'; font-size:'+fontsize+'vmin"></div>';
+  }
+}
 //получить ячейки
 function getItemsArr(minItem, maxItem, countItems) {
   let result = [];
@@ -123,17 +160,13 @@ function getRandomIntInclusive(min, max) {
 
 //Вывод таймера
 function printTimer(timerCount, score) {
-  let timerId = setInterval(function() {
+  /*let timerId = setInterval(function() {
     document.getElementById("item-time").innerHTML = --timerCount;
-    if (timerCount == 8){
-
-
-    }
     if (timerCount == 0) {
       gameOver(timerId, score);
     }
   }, 1000);
-  return timerId;
+  return timerId;*/
 }
 
 //Анимация появления числа
@@ -153,15 +186,14 @@ function animateNumberValue(id,from,to,duration) {
 //Функция вызывается когда игрок проиграл
 function gameOver(timerId, score) {
   //alert("Вы проиграли");
-
-  set_cookie("score", score, 2021, 02, 15, "", "https://ryabovso.github.io/Summator/", "secure");
+  //set_cookie("score", score, 2021, 02, 15, "", "https://ryabovso.github.io/Summator/", "secure");
 
   document.getElementById("score").innerHTML = score;
-
   clearInterval(timerId); //останавливаем таймер
   document.querySelector(".header").classList.add("blur");
   document.querySelector(".fields").classList.add("blur");
   document.querySelector(".game-menu").classList.remove("hide");
+  document.querySelector(".game-menu-end").classList.remove("hide");
 }
 
 //Функция для установки куки
