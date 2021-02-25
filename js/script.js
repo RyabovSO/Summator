@@ -160,13 +160,13 @@ function getRandomIntInclusive(min, max) {
 
 //Вывод таймера
 function printTimer(timerCount, score) {
-  /*let timerId = setInterval(function() {
+  let timerId = setInterval(function() {
     document.getElementById("item-time").innerHTML = --timerCount;
     if (timerCount == 0) {
       gameOver(timerId, score);
     }
   }, 1000);
-  return timerId;*/
+  return timerId;
 }
 
 //Анимация появления числа
